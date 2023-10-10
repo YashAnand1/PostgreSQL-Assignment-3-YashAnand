@@ -1,5 +1,3 @@
-# PostgreSQL-Assignment-3-YashAnand
-
 <div align="center">
 
 REFER TO THIS
