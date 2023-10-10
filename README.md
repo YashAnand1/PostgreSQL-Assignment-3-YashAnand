@@ -12,7 +12,7 @@ ________________________________________________________________________________
 </div>
 
   - [Overview](#-introduction)  
-  - Prerequisites](#prerequisites)  
+  - [Prerequisites](#-prerequisites)  
   - [Creation Of Database](#creation-of-database)  
   - [Schema Design](#️-schema-design)  
       - [HR Schema](#-hr-schema)  
@@ -20,13 +20,14 @@ ________________________________________________________________________________
       - [Management Schema](#-management-schema)  
   - [Relationships](#-relationships)  
       - [Primary Keys](#primary-keys)    
-      - [Foreign Keys](#foreign-keys)  
-  - [CONCLUSION](#conclusion)  
+      - [Foreign Keys](#foreign-keys)
+  - [Queries & Reporting](#-queries--reporting)  
+  - [Conclusion](#conclusion)  
  
 _____________________________________________________________________________________      
 <div align="center">
    
-## 🪧 INTRODUCTION
+## 🪧 Overview 🪧
 </div>
 
 Postgres is 
@@ -39,7 +40,7 @@ replace this with custom gif
 
 <div align="center">
    
-## 📥 What Is RDBMS?
+## Prerequisites
 </div>
 
 In an RDBMS or Relational Database Management System, the data is organised into tables with rows and columns - like it is done in a spreadsheet. The data entered in a row of the table would be associated with its respective column's header, making the data more structured and tidy. The main component of an RDBMS therefore consists of its capability of inputting data as tables and also allowing data interaction and management based on the relationship between the tables. 
@@ -53,7 +54,7 @@ In order to do so, he could utilise an RDBMS to help him store and manage data i
 --------
 <div align="center">
 
-## ⚙️ What Is ACID?
+## ⚙️ Creation Of Database
 </div>
 
 ACID Compliance in the context of databases stands for Atomicity, Consistency, Isolation and Durability. These 4 components help with a stronger reliablility and integrity of data transactions, which is a logical unit of work done using database operations such as inserting, deleting or updating data. The components of ACID Compliance can therefore be understood better in the following way:
@@ -76,7 +77,7 @@ The durability property states that once a transaction has been carried out, the
 
 <div align="center">
    
-## 🆚 RDBMS vs DBMS
+## 🆚 Schema Design
 </div>
 
 As stated before, an **RDBMS** or Relational Database Management System is a management system of database where data is stored in tables and data interaction is done based on the relationship between these tables. An RDBMS is an advanced version of a simple **DBMS** or Database Management System, where the entire flow of data from its insertion, creation, updation and retrieval is taken care while maintaining uniformity of the database. We can therefore understand that an RDBMS is an advanced form of DBMS, as it also helps with managing databases where relations can be created between various data in the form of tables. 
@@ -100,7 +101,7 @@ Some of the key features and difference of and between RDBMS and DBMS are as fol
 
 <div align="center">
    
-## 🔑 What Are Primary & Foreign Keys?
+## 🔑 Relationships
 </div>
 
 When it comes to maintaining a relationship between tables and uniquely identifying the data from a table, foreign key and primary keys, respectively can help us greatly in a Relational Database Management System. It should be noted that the primary key of one table is a foreign key to an another table, when it comes to forming relations of tables.                             
@@ -119,7 +120,7 @@ In conclusion, Primary Keys help with uniquely identifying a row in the table an
 
 <div align="center">
    
-## What is Indexing?
+## Queries & Reporting
 
 </div>
 
