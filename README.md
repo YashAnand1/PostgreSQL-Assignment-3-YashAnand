@@ -11,13 +11,13 @@ ________________________________________________________________________________
 
 </div>
 
-  - [Overview](#-introduction)  
-  - [Prerequisites](#-prerequisites)  
+  - [Overview](#introduction)  
+  - [Prerequisites](#prerequisites)  
   - [Creation Of Database](#creation-of-database)  
-  - [Schema Design](#️-schema-design)  
-      - [HR Schema](#-hr-schema)  
-      - [Technical Schema](#-technical-schema)  
-      - [Management Schema](#-management-schema)  
+  - [Schema Design](#️schema-design)  
+      - [HR Schema](#hr-schema)  
+      - [Technical Schema](#technical-schema)  
+      - [Management Schema](#management-schema)  
   - [Relationships](#-relationships)  
       - [Primary Keys](#primary-keys)    
       - [Foreign Keys](#foreign-keys)
