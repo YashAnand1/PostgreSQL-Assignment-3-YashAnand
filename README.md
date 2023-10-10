@@ -1,40 +1,25 @@
 <div align="center">
 
-REFER TO THIS
-https://dev.to/percoguru/getting-started-with-apis-in-golang-feat-fiber-and-gorm-2n34#contents
-
-emoji
-https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
-
 ![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
 
-# PostgresSQL Session-2        
-### — Assignment Document —    
+# PostgresSQL Session-3        
+### — Tasks Documentation —    
 
 _____________________________________________________________________________________                        
 
 ## 📚 Contents 
 
 </div>
-
-- [PostgresSQL Session-2](#postgressql-session-2)
-    - [— Assignment Document —](#-assignment-document-)
-  - [📚 Contents](#-contents)
-  - [🪧 INTRODUCTION](#-introduction)
-  - [📥 What Is RDBMS?](#-what-is-rdbms)
-  - [⚙️ What Is ACID?](#️-what-is-acid)
-      - [Atomicity](#atomicity)
-      - [Consistency](#consistency)
-      - [Isolation](#isolation)
-      - [Durability](#durability)
-  - [🆚 RDBMS vs DBMS](#-rdbms-vs-dbms)
-  - [🔑 What Are Primary \& Foreign Keys?](#-what-are-primary--foreign-keys)
+  - [Overview](#-introduction)
+  - Prerequisites](#prerequisites)
+  - [Creation Of Database](#creation-of-database)
+  - [Schema Design](#️-schema-design)
+      - [HR Schema](#-hr-schema)
+      - [Technical Schema](#-technical-schema)
+      - [Management Schema](#-management-schema)
+  - [Relationships](#-relationships)
       - [Primary Keys](#primary-keys)
       - [Foreign Keys](#foreign-keys)
-  - [What is Indexing?](#what-is-indexing)
-      - [B-Tree Map Index](#b-tree-map-index)
-      - [Unique Index](#unique-index)
-      - [Bitmap Index](#bitmap-index)
   - [CONCLUSION](#conclusion)
  
 _____________________________________________________________________________________      
