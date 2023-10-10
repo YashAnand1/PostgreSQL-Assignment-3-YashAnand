@@ -7,20 +7,20 @@
 
 _____________________________________________________________________________________                        
 
-## 📚 Contents 
+## 📚 Contents 📚
 
 </div>
-  - [Overview](#-introduction)
-  - Prerequisites](#prerequisites)
-  - [Creation Of Database](#creation-of-database)
-  - [Schema Design](#️-schema-design)
-      - [HR Schema](#-hr-schema)
-      - [Technical Schema](#-technical-schema)
-      - [Management Schema](#-management-schema)
-  - [Relationships](#-relationships)
-      - [Primary Keys](#primary-keys)
-      - [Foreign Keys](#foreign-keys)
-  - [CONCLUSION](#conclusion)
+  - [Overview](#-introduction)  
+  - Prerequisites](#prerequisites)  
+  - [Creation Of Database](#creation-of-database)  
+  - [Schema Design](#️-schema-design)  
+      - [HR Schema](#-hr-schema)  
+      - [Technical Schema](#-technical-schema)  
+      - [Management Schema](#-management-schema)  
+  - [Relationships](#-relationships)  
+      - [Primary Keys](#primary-keys)    
+      - [Foreign Keys](#foreign-keys)  
+  - [CONCLUSION](#conclusion)  
  
 _____________________________________________________________________________________      
 <div align="center">
