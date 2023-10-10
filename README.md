@@ -2,297 +2,162 @@
 
 <div align="center">
 
-# Documentation: PostgreSQL Tasks        
-### — Database, Tables & Queries —    
+REFER TO THIS
+https://dev.to/percoguru/getting-started-with-apis-in-golang-feat-fiber-and-gorm-2n34#contents
 
-_____________________________________________________________________________________                        
-
-#### <u>INCLUDED TOPICS</u>  
-
-</div>
-<center>
-
-Understanding & Setting-Up PostgreSQL                     
-PostgreSQL: Q&A                       
-TASK I - Database & Sample Table                        
-TASK II - Table Data Retrieval & SQL Queries                          
-
-<center>      
-
-_____________________________________________________________________________________      
-
-</center>
-   
-
-<center>
-
-## Understanding & Setting-Up PostgreSQL
-
-</center>
-
-PostgreSQL or Postgres is a relational database management system (RDBMS). The data is organised here into tables with rows and columns. Additionally, the storing and retrieving of data is done using SQL on the basis of the relation between tables.
-
-<div align="center">
-<center>
+emoji
+https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
 
 ![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
 
-</div>
-</center>
+# PostgresSQL Session-2        
+### — Assignment Document —    
 
-Some of the main features of Postgre include:   
-- Storage & management of structured data 
-- Efficient retrieval capabilities
-- SQL for interacting with DB 
+_____________________________________________________________________________________                        
 
-On my system, the installation of Postgres was done using this [YouTube Tutorial](https://www.youtube.com/watch?v=-LwI4HMR_Eg). Addiitonally, majority of the learnings that I have utilised for performing the assigned tasks came from this tutorial as well:
-
-[![IMAGE_ALT](https://img.youtube.com/vi/-LwI4HMR_Eg/maxresdefault.jpg)](https://www.youtube.com/watch?v=-LwI4HMR_Eg)
-
-
-The steps followed for the setting-up Postgres were as follows:   
-- Installing PostgresSQL & additional utilities using **`sudo apt-get install postgresql postgresql-contrib`**
-
-  **Output:**
-<div align="center">
-
-  ![image](https://i.imgur.com/wjfuUE2.png)
+## 📚 Contents 
 
 </div>
 
-  
-- Checking the status of Postgres using **`service postgresql status`**
-  
-  **Output:**
-<div align="center">
-
-
-  ![image](https://i.imgur.com/PT63rvh.png)
-
-</div>
-
-- Entering Postgres using **`sudo su postgres`**
-
-  Output:      
-<div align="center">
-
-
-  ![image](https://i.imgur.com/BOhq5Yl.png)
-
-</div>
-
-  
-- Launching PSQL terminal for interacting with the database using **`psql`**
-
-  Output:        
-<div align="center">
-
-
-  ![image](https://i.imgur.com/37B5gkI.png)
-
-</div>
-
-
-- Creating user with **`CREATE USER yashanand WITH PASSWORD 'a';`** and listing all users with **`\du`**
-
-  Output:  
-<div align="center">
-  
-  ![image](https://i.imgur.com/NHEH3jw.png)
-
-</div>
-
-- Adding Superuser privilege to the new user using **`ALTER USER yashanand WITH SUPERUSER;`**
+- [PostgresSQL Session-2](#postgressql-session-2)
+    - [— Assignment Document —](#-assignment-document-)
+  - [📚 Contents](#-contents)
+  - [🪧 INTRODUCTION](#-introduction)
+  - [📥 What Is RDBMS?](#-what-is-rdbms)
+  - [⚙️ What Is ACID?](#️-what-is-acid)
+      - [Atomicity](#atomicity)
+      - [Consistency](#consistency)
+      - [Isolation](#isolation)
+      - [Durability](#durability)
+  - [🆚 RDBMS vs DBMS](#-rdbms-vs-dbms)
+  - [🔑 What Are Primary \& Foreign Keys?](#-what-are-primary--foreign-keys)
+      - [Primary Keys](#primary-keys)
+      - [Foreign Keys](#foreign-keys)
+  - [What is Indexing?](#what-is-indexing)
+      - [B-Tree Map Index](#b-tree-map-index)
+      - [Unique Index](#unique-index)
+      - [Bitmap Index](#bitmap-index)
+  - [CONCLUSION](#conclusion)
  
-  Output:   
+_____________________________________________________________________________________      
 <div align="center">
-
-  ![image](https://i.imgur.com/MKmzGyc.png)
-
+   
+## 🪧 INTRODUCTION
 </div>
 
+Postgres is 
+> This assignment has also been documented as a video and can be viewed by clicking the video below:
+<div align="center">
 
---------------------------------
-<center>
+replace this with custom gif 
+[![IMAGE_ALT](https://img.youtube.com/vi/-LwI4HMR_Eg/0.jpg)](https://www.youtube.com/watch?v=-LwI4HMR_Eg)
+   </div>
 
-## PostgreSQL: Q&A    
+<div align="center">
+   
+## 📥 What Is RDBMS?
+</div>
 
-</center>
+In an RDBMS or Relational Database Management System, the data is organised into tables with rows and columns - like it is done in a spreadsheet. The data entered in a row of the table would be associated with its respective column's header, making the data more structured and tidy. The main component of an RDBMS therefore consists of its capability of inputting data as tables and also allowing data interaction and management based on the relationship between the tables. 
 
-After gaining a basic understanding and a working set-up of Postgres, I worked on giving answers to the 'True or False' questions as a part of our first assignment. It should be noted that these questions were based on the 'Technical Charcha On PostgreSQL' session that was conducted by Mr. Vinay Pawar on 24 September, 2023.
+For better understanding, lets assume there is a soft-drink refrigerator which stores different drinks. However, the manager of the store that this fridge is set up in, wishes to efficiently manage data related to the various soft drinks such as:
+- Name of all the soft-drink brands
+- Details related to supplier of the soft-drinks
 
-The answers to the 'True or False' questions asked are as follows:  
+In order to do so, he could utilise an RDBMS to help him store and manage data in the form of various tables. This could be done by creating one table called "Brands" and another called "Suppliers", and populating the related data into these tables. However, in order to check which supplier is in charge of supplying a specific soft-drink, a relation could be formed between the 2 tables for relating different brands with their suppliers, using the concept of foreign keys in the "Suppliers" table.
 
-| Q.No. | Question | ANSWER |
-|-----| ------------|------------|     
-| 01 | PostgreSQL is an example of an RDBMS (Relational Database Management System). | True |
-| 02 | PostgreSQL is known for features such as ACID compliance, extensibility, and high performance. | True |
-| 03 | In PostgreSQL, a database is a collection of related tables. | True |
-| 04 | A SELECT statement is used to retrieve data from a PostgreSQL table. | True |
-| 05 | SQL queries can be used to modify data in a PostgreSQL database, including inserting, updating, and deleting records. | True |
-| 06 | NOT NULL constraints cannot be applied to columns in PostgreSQL. | False |
-| 07 | Unique constraints ensure that values in a column are unique across all records in a table. | True |
-| 08 | CHECK constraints allow you to specify custom rules for data validation. | True |
-| 09 | Data types in a database define the kind of values that can be stored in a column, such as integers, text, or dates. | True |
-| 10 | Foreign keys are used to establish relationships between tables by referencing the primary key of another table. | True |
+--------
+<div align="center">
 
---------------------------------
-<center>
+## ⚙️ What Is ACID?
+</div>
 
-## TASK I - Database & Sample Table 
+ACID Compliance in the context of databases stands for Atomicity, Consistency, Isolation and Durability. These 4 components help with a stronger reliablility and integrity of data transactions, which is a logical unit of work done using database operations such as inserting, deleting or updating data. The components of ACID Compliance can therefore be understood better in the following way:
 
-</center>
+#### Atomicity 
+According to this property, the entire transaction is either complete or none of it is. A transaction in this case works as a single unit and cannot be divided into sub-transactions, meaning that either the entire process of data interaction is going to succeed or the entire operation would be aborted and rolled back to the previous state. 
 
+An example of such a case would be when an online transaction of money is done using PhonePay. As per the atomicty of a database, if any part of this process fails after the deduction from the sender's account but before the transfer to recipient's account, then the entire transaction is to be rolled back so that the sender does not lose their money.
 
-| **Task: Create a new PostgreSQL database and set up a sample table.**  |
-|----------------| 
-| 1.1. Create a new database named "company."  |
-| 1.2. Create a table named "employees" with columns for ID, first name, last name, and job title.   | 
-| 1.3. Insert at least three sample employee records into the table.  |
-______
-As per the first task, it was required to have Postgres installed and set-up on my system. Therefore, I utilised the steps mentioned in the first section for installing and setting-up Postgres. Through these steps, I was able to successfully create a new user using the PSQL interactive terminal and was ready to get started with the tasks. 
+#### Consistency
+The property of Consitency ensures that the data is always available in a consistent state and that the rules set for data interaction, are not being violated during transactions. What this means is that the stored data is to remain reliable and as near accurate as possible. Going back to the previous example of making transactions using PhonePay, such a rule of consistency is that the sender would only be allowed to enter positive digits, when requesting transfer of money. Adding such constraints help keep the data remain in a reliable state. 
+
+#### Isolation
+According to the rule of Isolation, when operations are performed on the data through multiple transactions from multiple users, the transactions are carried out separately without affecting the other transactions. What this means is that if 2 operations are done on the same data then only one transaction would succeed and that the operation made slightly after would fail. For example, if a seat is being booked for a movie on [BookMyShow](www.bookmyshow.com) then multiple people would not be able to book the same seat and only the transaction that was done first would succeed. Isolation therefore ensures that multiple transactions do not mess up eachother's operations.
+
+#### Durability
+The durability property states that once a transaction has been carried out, then the data and the operations made would remain in a permanent state. Going back to the previous example of booking a seat for a movie using BookMyShow, the property of durability would ensure that once the transaction or the booking has been made, all the bookings would remain intact even after a server-failure at BookMyShow. Once the transaction has been done, it cannot be undone accidentally until and unless a request is made for it. 
+
+--------
+
+<div align="center">
+   
+## 🆚 RDBMS vs DBMS
+</div>
+
+As stated before, an **RDBMS** or Relational Database Management System is a management system of database where data is stored in tables and data interaction is done based on the relationship between these tables. An RDBMS is an advanced version of a simple **DBMS** or Database Management System, where the entire flow of data from its insertion, creation, updation and retrieval is taken care while maintaining uniformity of the database. We can therefore understand that an RDBMS is an advanced form of DBMS, as it also helps with managing databases where relations can be created between various data in the form of tables. 
   
-## **Task 1.1. Create a new database named "company."**  
-For creating a database, I referred to this [YouTube Tutorial](https://www.youtube.com/watch?v=-LwI4HMR_Eg) and [this article](https://www.tutorialspoint.com/postgresql/postgresql_create_database.htm) by Tutorial's Point. Inside the PSQL, I wrote the following SQL query for creating a database called "company":
-```
-CREATE DATABASE company;
-``` 
-**Output:**   
-<div align="center">
+Some of the key features and difference of and between RDBMS and DBMS are as follows:
+| S. No. | RDBMS | DBMS |
+|--- | --| -- |
+| 1 | Stands for Relational Database Management System | Stands for Database Management System | 
+| 2 | Data is stored as rows & columns in tables | Data is stored in the form of files |
+| 3 | The stored data is always in a structured form | The stored data may or may not be structured|
+| 4 | Data relation can be formed using primary & foregin keys | Data relation can be formed but not to the extent of an RDBMS |
+| 5 | Many data elements can be accessed at the same time | Data elements have to be accessed individually |
+| 6 | Keys and indexes disallow data redundancy | Data redundancy is very common |
+| 7 | Usually used to handle large amount of data | Usually used for handling small data |
+| 8 | Multiple levels of security measures are provided for data manipulation | Weak security measures provided for data manipulation |
+| 9 | Data fetching is faster due to its relational approach | Data fetching can be fast but for small amount of data |
+| 10 | Ideal for applications with structured data | Ideal for simpler storage needs |
+| 11 | Example: PostgreSQL, MySQL, Oracle, etc. | Example: XML, Forxpro, Window Registry, etc. |
 
-![image](https://i.imgur.com/kLfWLC9.png)   
+--------
+
+<div align="center">
+   
+## 🔑 What Are Primary & Foreign Keys?
 </div>
 
-In this query, I created a new database without specifying the owner. If I was to specify the owner, the query would have been `CREATE DATABASE company WITH OWNER yashanand;`. Regardless, a database was still created with `postgres` as its default owner. It should be noted that it is important to add `;` at the end of a query for its termination.
+When it comes to maintaining a relationship between tables and uniquely identifying the data from a table, foreign key and primary keys, respectively can help us greatly in a Relational Database Management System. It should be noted that the primary key of one table is a foreign key to an another table, when it comes to forming relations of tables.                             
 
-In order to ensure that the database had been created, I utilised the `\l` command for listing the stored databases and the output  as follows:   
+To understand better, lets assume that 2 tables called 'Brands' and 'Suppliers' have been created with 'Brand_ID' and 'Supplier_ID' as the primary keys. Additionally, the 'Suppliers' table will be containing the 'Brand_ID' from the 'Brands' table. 
 
-<div align="center">
+#### Primary Keys       
+In the above example, while 'Brand_ID' is a primary key for the 'Brands' table, 'Supplier_ID' is the primary key for the 'Suppliers' table. The main idea behind adding a primary key to tables is that they help ensure that the data related to different attributes or column, is always unique for each row. This uniqueness helps the process of data interaction immensely as all of the rows are allowed to be treated as an individual data inside the table. In the 2 tables that have been provided above, primary keys help uniquely identify the brands and suppliers from the 2 tables. 
 
-![image](https://i.imgur.com/gBtfQuX.png)
+#### Foreign Keys          
+However, it is worth noting that in the 'Suppliers' table, the primary keys of the 'Brands' table are added as a column, which allows them to be treated as a foreign key in the 'Suppliers' table. Since the primary key of one table is the foreign key of another, adding the primary key of one table to another helps create a relation between these 2 tables and making sense of its data became easier. Therefore, a foreign key is a column (or a group of columns) that help create a relation between data in multiple tables. 
 
-</div>
+In conclusion, Primary Keys help with uniquely identifying a row in the table and when they are added to another table, they become Foreign Keys and help form relations between the table that they have been added to and the table that they originally belonged to.
 
-## **Task 1.2. Create a table named "employees" with columns for ID, first name, last name, and job title.**  
-In order to create a table, I first entered into the "company" database using `\c company`. As it was not specified in the task, I did not create a new schema by writing a query such as `CREATE SCHEMA companyschema;` and allowed essentially allowed the schema to be set as the default 'Public' schema.
-
-For creating a table called "employees" inside the "company" database, with headers for "id", "first_name", "last_name" and "job title", I wrote the following query:
-```
-CREATE TABLE employees(
-id int PRIMARY KEY,
-first_name varchar,
-last_name varchar,
-job title varchar
-);
-```
-
-**Output:**
+--------
 
 <div align="center">
-
-![image](https://i.imgur.com/K6Kp9id.png)
-
-</div>
-
-The reasoning behind declaring "id" as int type was that the values related to it were only going to be in integer values. Similarly, the rest of the headers were declared as varchar in order to store variable characters upto 255 bytes as values.
-
-## **1.3. Insert at least three sample employee records into the table.**   
-The three sample records that I created for inserting into the table were added to their specified headers by writing the following query:
-```
-INSERT INTO employees (id, first_name, last_name, job_title)
-VALUES
-(543, 'Yash', 'Anand', 'Contractor'),
-(876, 'Puneet', 'Gupta', 'Employee'),
-(234, 'Ankur', 'Kumar' , 'Intern');
-```  
-
-**Output:**
-
-<div align="center">
-
-![image](https://i.imgur.com/Q6aPCC7.png)
+   
+## What is Indexing?
 
 </div>
 
+Indexing can be explained as an organised reference or shortcut that allows the DBMS to locate specific rows of data without having to scan the entire table. In order to better understand this, lets first take an example of an Index of a book. In such an Index, chapters/sections are associated with a specific page number on which they can be found. For this, One needs to simply go through the list of mentioned chapters/sections and check which page number is written in front of them. 
 
-As explained in the previous sub-task, the first column for "id" included integers but the "first_name", "last_name" and "job_title" were created for storing varchar data types and therefore, consisted of variable characters.
-____
+The Indexing in a DBMS works in a very similar way. In the context of a DBMS, an Index stores references to specific rows in a table based on the values in a column or various columns. The positives of Indexing therefore include faster data-retrieval operations and an efficient way to access the data. The negatives however mostly consists of the extra space taken by an index as well as the extra time taken to update and maintain an Index.
 
-<center>
+Some of the most common Indexing types are as follows:  
 
-## TASK II - Table Data Retrieval & SQL Queries 
+#### B-Tree Map Index
+The main feature of such as Indexing type is that it speeds up queries which involve conditions related to equality and range. An example of an equality codition can be 'WHERE column = value and an example of an range conditions can be 'WHERE column BETWEEN x AND y'.
+  
+#### Unique Index
+ Such an Indexing type helps ensuring that the values of the indexed columns remain unique across all rows in the table, preventing duplicate entries and possible redundancy. A use case for such an Indexing type can be creating a unique index column to remove duplicacy.
+  
+#### Bitmap Index
+ Such types are are efficient for columns with a low number of distinct values and help when the queries involve multiple columns. For example, such Indexes represent each value in the index as a bitmap, meaning that each Bit would be associated with a row in the table. For example, the queries involving the usage of AND, OR, or NOT operations can be solved using this form of Indexing.
 
-</center>
-
-
-| **Task: Write SQL queries to retrieve data from the "employees" table.**  |
-|----------------| 
-| 2.1. Retrieve all records from the "employees" table.  |
-| 2.2. Retrieve only the first and last names of all employees. | 
-| 2.3. Sort the employees by last name in alphabetical order. |
-_____
-In this task, SQL queries were to be utilised for interacting with the "employees" table that was created inside the "company" database. Inside the "company" database, that I had entered into using `\c company`, I worked on performing the sub-tasks provided below:  
-
-## **Task  2.1. Retrieve all records from the "employees" table.**  
-After having added sample records to the "employees" table, I retrieved all of the records from the table by running the following query:
-```
-SELECT * FROM employees
-```
-**Output:**   
-<div align="center">
-
-![image](https://i.imgur.com/FwOFJmx.png)
-
-</div>
-
-
-In this query, `SELECT *` is used for the retrieval of all records from a specific table of "employees" using `FROM employees` in the query. The `(3 rows)` under the displayed records shows that the displayed table consists of 3 rows.
-
-## **Task  2.2. Retrieve only the first and last names of all employees.**  
-In order to display selected columns of 'first_name' and 'last_name' from the "employees" table, I ran the following query for the display of specific columns: 
-```
-SELECT first_name, last_name FROM employees;
-```
-
-**Output:**   
+--------
 
 <div align="center">
-
-![image](https://i.imgur.com/pdYb4Uk.png)
-
+   
+## CONCLUSION
 </div>
 
-Unlike the previous query where we were running `SELECT *` for retrieving all records, we used `SELECT first_name, last_name` for retrieving specific records. Similar to the previous query, `FROM employees` is used in the query to specify which table we want to retrieve records from. The `(3 rows)` displayed under the output again to signify the number of rows in the displayed table.
-
-
-## **Task  2.3. Sort the employees by last name in alphabetical order.**  
-After having retrieved all of the records as well as specifc records from the "employees" table, the records retrieval was to be done this time by sorting employees by their `last_name` in alphabetical order. In order to perform this task, I wrote the following query:
-```
-SELECT * FROM employees ORDER BY last_name;
-```
-**Output:**  
-<div align="center">
-
-![image](https://i.imgur.com/JeoUXWr.png)
-
-</div>
-
-
-As mentioned earlier, `SELECT *` is used in the query for retrieving all records and `FROM employees` is utilised for specifying the table which includes the records. The `ORDER BY last_name` part of the query helped sorting the `last_name` column alphabetically. By default, the sorting is done in ascending order but it can be changed to descending order by running the following query:
- ```
-SELECT * FROM employees ORDER BY last_name DESC;
-```
-
-**Output:**    
-
-<div align="center">
-
-![image](https://i.imgur.com/y3Wfpgo.png)
-</div>
-
------------------------------------------------
-
-## **Conclusion**: 
-After looking into the answers for the 'True or False' questions and performing the 2 tasks, I have been able to successfully understand the basics of how databases are created and how they are used in Postgres. Inside these databases, I also learnt how to create tables and add records to it. Through the second task, I  have been able to understand the basics of writing queries for interacting with Postgres for mainly, data retrieval. 
-
---------------------------------
