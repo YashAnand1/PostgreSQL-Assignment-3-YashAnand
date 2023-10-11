@@ -30,8 +30,8 @@ ________________________________________________________________________________
 ## 🪧 Overview 🪧
 </div>
 
-Postgres is 
 > This assignment has also been documented as a video and can be viewed by clicking the video below:
+
 <div align="center">
 
 replace this with custom gif 
