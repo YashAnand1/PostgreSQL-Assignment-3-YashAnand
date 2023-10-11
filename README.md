@@ -25,10 +25,13 @@ ________________________________________________________________________________
 _____________________________________________________________________________________      
 <div align="center">
    
-## Overview 
+# Overview 
 </div>
 
-As a part of the third Technical Charcha session on PostgreSQL, the attendees were given an assignment comprising of 4 tasks to help gauge their understanding of PostgreSQL. This document serves as a documentation of these 4 tasks which involve the creation of database, schemas, tables and relationships, as well as the querying of the created data.
+As a part of the third Technical Charcha session on PostgreSQL, the attendees were given an assignment comprising of 4 tasks to help gauge their understanding of PostgreSQL. This document serves as a documentation of these 4 tasks which involve the following:
+- The creation of database, schemas, tables
+- The querying of the created data
+  
 <div align="center">     
 
 ![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
@@ -36,10 +39,19 @@ As a part of the third Technical Charcha session on PostgreSQL, the attendees we
 
 These completed tasks have been compiled into this single document with practical demonstrations, in the form of video and pictures. Through this document, one can aim to better understand how to form relationships between data, as it can be understood as the main theme of the assignment itself. 
 
+For the completition of the majority of the assigned tasks, I referenced [this PostgreSQL tutorial](https://www.w3schools.com/postgresql/postgresql_intro.php) by W3School along with Troy Amelotte's YouTube tutorial on the same, which has been provided below:
+
 <div align="center">     
 
-<!-- [![IMAGE_ALT](https://img.youtube.com/vi/-LwI4HMR_Eg/0.jpg)](https://www.youtube.com/watch?v=-LwI4HMR_Eg) -->
+[![IMAGE_ALT](https://img.youtube.com/vi/NvrpuBAMddw/maxresdefault.jpg)](https://www.youtube.com/watch?v=NvrpuBAMddw)
    </div>
+
+<!-- Adding youtube videos
+0 or 1 or 2 or 3 or 4, 0 (big) to 4 (small)
+hqdefault.jpg <- high quality
+mqdefault.jpg <- medium quality
+sddefault.jpg <- standard definition
+maxresdefault.jpg <- maximum resolution -->
 
 <div align="center">
    
