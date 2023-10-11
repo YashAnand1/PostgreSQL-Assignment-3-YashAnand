@@ -7,7 +7,7 @@
 
 _____________________________________________________________________________________                        
 
-## <u>Contents</u>
+## 📚 Contents 📚
 
 </div>
 
@@ -52,6 +52,8 @@ hqdefault.jpg <- high quality
 mqdefault.jpg <- medium quality
 sddefault.jpg <- standard definition
 maxresdefault.jpg <- maximum resolution -->
+
+_____________________________________________________________________________________     
 
 <div align="center">
    
