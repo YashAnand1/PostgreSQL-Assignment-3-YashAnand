@@ -20,7 +20,7 @@ ________________________________________________________________________________
     - [Management Schema](#management-schema)
   - [Task 3: Relationships](#task-3-relationships)
   - [Task 4: Queries \& Reporting](#task-4-queries--reporting)
-  - [CONCLUSION](#conclusion)
+  - [Conclusion](#conclusion)
  
 _____________________________________________________________________________________      
 <div align="center">
@@ -74,8 +74,11 @@ I was ready to get started with the assigned tasks as all of the conditions for 
 ![image](https://i.imgur.com/6cPtjnt.gif)
 </div>
 
-In the coming sections, we will be performing the following assigned tasks:
-- Creation of Database
+In the coming sections, the following assigned tasks will be performed and demonstrated:
+- Task 1: Creation of Database
+- Task 2: Schema Design
+- Task 3: Relationships
+- Task 4: Queries & Reporting
 
 --------
 <div align="center">
@@ -83,11 +86,14 @@ In the coming sections, we will be performing the following assigned tasks:
 ## Task 1: Creation Of Database
 </div>
 
-ACID Compliance in the context of databases stands for Atomicity, Consistency, Isolation and Durability. These 4 components help with a stronger reliablility and integrity of data transactions, which is a logical unit of work done using database operations such as inserting, deleting or updating data. The components of ACID Compliance can therefore be understood better in the following way:
+> Create a new PostgreSQL database named "keenable"         
+
+
+Once ensuring that the PostgreSQL service was active on the system, I proceeded with the first task for creating a database called 'keenable'. 
 
 --------
 
-<div align="center">
+<div align="center">Q
    
 ## Task 2: Schema Design
 </div>
