@@ -1,7 +1,7 @@
 <div align="center">
 
 ![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
-
+<!-- add technical charcha logo postgres session 3 -->
 # PostgresSQL Session-3        
 ### — Tasks Documentation —    
 
@@ -28,13 +28,17 @@ ________________________________________________________________________________
 ## Overview 
 </div>
 
-> This assignment has also been documented as a video and can be viewed by clicking the video below:
+As a part of the third Technical Charcha session on PostgreSQL, the attendees were given an assignment comprising of 4 tasks to help gauge their understanding of PostgreSQL. This document serves as a documentation of these 4 tasks which involve the creation of database, schemas, tables and relationships, as well as the querying of the created data.
+<div align="center">     
 
-<div align="center">
+![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
+   </div>
 
-replace this with custom gif            
+These completed tasks have been compiled into this single document with practical demonstrations, in the form of video and pictures. Through this document, one can aim to better understand how to form relationships between data, as it can be understood as the main theme of the assignment itself. 
 
-[![IMAGE_ALT](https://img.youtube.com/vi/-LwI4HMR_Eg/0.jpg)](https://www.youtube.com/watch?v=-LwI4HMR_Eg)
+<div align="center">     
+
+<!-- [![IMAGE_ALT](https://img.youtube.com/vi/-LwI4HMR_Eg/0.jpg)](https://www.youtube.com/watch?v=-LwI4HMR_Eg) -->
    </div>
 
 <div align="center">
@@ -42,13 +46,22 @@ replace this with custom gif
 ## Prerequisites
 </div>
 
-In an RDBMS or Relational Database Management System, the data is organised into tables with rows and columns - like it is done in a spreadsheet. The data entered in a row of the table would be associated with its respective column's header, making the data more structured and tidy. The main component of an RDBMS therefore consists of its capability of inputting data as tables and also allowing data interaction and management based on the relationship between the tables. 
+Before getting started with the assigned tasks, it was important to have PostgreSQL installed on my computer. In order to install this [Relational Database Management System](https://cloud.google.com/learn/what-is-a-relational-database) and its additional utilities, I had to run the following command:
+```
+sudo apt-get install postgresql postgresql-contrib
+```
+Next, I ensured that the status of the installed postgreSQL service was active. This was checked by runnning the following command:
+```
+service postgresql status
+```
+I was ready to get started with the assigned tasks as all of the conditions for the prerequisites had been met, when the output of the above command displayed PostgreSQL as an `active` service:
+<div align="center">
 
-For better understanding, lets assume there is a soft-drink refrigerator which stores different drinks. However, the manager of the store that this fridge is set up in, wishes to efficiently manage data related to the various soft drinks such as:
-- Name of all the soft-drink brands
-- Details related to supplier of the soft-drinks
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
 
-In order to do so, he could utilise an RDBMS to help him store and manage data in the form of various tables. This could be done by creating one table called "Brands" and another called "Suppliers", and populating the related data into these tables. However, in order to check which supplier is in charge of supplying a specific soft-drink, a relation could be formed between the 2 tables for relating different brands with their suppliers, using the concept of foreign keys in the "Suppliers" table.
+In the coming sections, we will be performing the following assigned tasks:
+- Creation of Database
 
 --------
 <div align="center">
@@ -74,8 +87,8 @@ As stated before, an **RDBMS** or Relational Database Management System is a man
 --------
 
 <div align="center">
-   
-## Task 3: Relationships
+
+## Task 3: Relationships 
 </div>
 
 When it comes to maintaining a relationship between tables and uniquely identifying the data from a table, foreign key and primary keys, respectively can help us greatly in a Relational Database Management System. It should be noted that the primary key of one table is a foreign key to an another table, when it comes to forming relations of tables.     
