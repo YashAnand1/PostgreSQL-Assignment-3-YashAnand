@@ -15,12 +15,13 @@ ________________________________________________________________________________
   - [Prerequisites](#prerequisites)
   - [Task 1: Creation Of Database](#task-1-creation-of-database)
   - [Task 2: Schema Design](#task-2-schema-design)
-    - [HR Schema](#hr-schema)
-    - [Technical Schema](#technical-schema)
-    - [Management Schema](#management-schema)
+    - [2. Creating Schemas](#2-creating-schemas)
+    - [2.1. Defining HR Schema](#21-defining-hr-schema)
+    - [2.2. Defining Technical Schema](#22-defining-technical-schema)
+    - [2.3. Defining Management Schema](#23-defining-management-schema)
   - [Task 3: Relationships](#task-3-relationships)
   - [Task 4: Queries \& Reporting](#task-4-queries--reporting)
-  - [Conclusion](#conclusion)
+  - [CONCLUSION](#conclusion)
  
 _____________________________________________________________________________________      
 <div align="center">
@@ -89,20 +90,143 @@ In the coming sections, the following assigned tasks will be performed and demon
 > Create a new PostgreSQL database named "keenable"         
 
 
-Once ensuring that the PostgreSQL service was active on the system, I proceeded with the first task for creating a database called 'keenable'. 
+Once ensuring that the PostgreSQL service was active on the system, I proceeded with the first task for creating a database called 'keenable'. However, I had to follow some specific steps before so that I could be able to create the specified database.
+
+First, I assumed the identity of the `Postgres` user for performing the administrative tasks related to PostgreSQL that are permitted to the default Postgres user. Such tasks include managing PostgreSQL, starting the PSQL terminal and writing SQL queries, to name a few. Switching to this user was done using the following command:
+```
+sudo su postgres
+```
+
+Here, sudo su is a command that is used for switching user or `su` using the privileges of a superuser `sudo`. As explained earlier, `postgres` is the user we switch to. The output of running the above command was as follows:
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+After switching the default Postgres user, I was able to gain the privilege of running PSQL terminal, where SQL queries can written for interacting with the database and make changes using keywords. The command for enabling this terminal is:
+```
+psql
+```
+The output of running this command displays the PSQL version and starts the PSQL terminal for allowing interaction with database using SQL queries:
+ <div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+Once I had entered the PSQL terminal, it was possible to write SQL queries for performing the first task of creating a database. In order to create a database called 'keenable', I ran wrote the following query in the PSQL terminal:
+```
+CREATE DATABASE keenable;
+```
+Here the 'CREATE DATABASE' keywords of this query are self-explanatory as they are being used for creating a database. The third component of the query, `keenable`, is the name of the database that I was to create and most importantly, the `;` or semi-colon was used to tell SQL that I had completed the query. The output of running this entire query was:
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+In order to ensure that the database had truly been created, I ran the following command as the final step in for the completion of this first task:
+```
+\l
+```
+This command is run for listing all the existing databases in Postgres and I was able to utilise it to list the newly created `keenable` database. The output of this command was as follows:
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+With the `keenable` database created, this first task came to an end as it had been completed. In the following tasks, this newly created database was used for storing and creating schemas, tables and relationships. 
 
 --------
 
-<div align="center">Q
+<div align="center">
    
 ## Task 2: Schema Design
 </div>
 
-As stated before, an **RDBMS** or Relational Database Management System is a management system of database where data is stored in tables and data interaction is done based on the relationship between these tables. An RDBMS is an advanced version of a simple **DBMS** or Database Management System, where the entire flow of data from its insertion, creation, updation and retrieval is taken care while maintaining uniformity of the database. We can therefore understand that an RDBMS is an advanced form of DBMS, as it also helps with managing databases where relations can be created between various data in the form of tables. 
+>**2. Define three schemas within the database: "hr", "technical", and "management."**   
+>
+>**2.1 HR Schema:**  
+Create the following tables in the "hr" schema:   
+2.1.1. "employees" to store employee information (employee_id, first_name,  
+last_name, email, hire_date).   
+2.1.2. "vacation_requests" to track employee vacation requests (request_id,
+employee_id, start_date, end_date, status). 
+>
+>**2.2. Technical Schema:**  
+Create the following tables in the "technical" schema:  
+2.2.1. "projects" to store project details (project_id, project_name, start_date,
+end_date).  
+2.2.2. "project_assignments" to associate employees with projects
+(assignment_id, project_id, employee_id, assignment_date).  
+>
+>**2.3. Management Schema:** 
+Create the following tables in the "management" schema: 
+2.3.1. "departments" to manage department information (department_id,
+department_name, location).   
+2.3.2. "department_employees" to track employee department assignments
+(assignment_id, employee_id, department_id, start_date, end_date).  
 
-### HR Schema
-### Technical Schema
-### Management Schema
+In databases, schemas are ............ hierarchy
+
+Provided below in this section is the demonstration of how I completed this second task by creating schemas, adding tables to them and forming relations between the tables. Though it had not been asked in the task itself, I also inserted values to the created tables in order to be able to make a better sense of the relations created. 
+
+### 2. Creating Schemas   
+
+Before getting started with creating the schemas, I had to enter the newly created `keenable` database as it had specifically been stated in the task that the schemas were to be created in this database only. In order to enter the datbase, I ran the following command from the PSQL terminal:
+```
+\c keenable
+``` 
+Using this command, I was able to get connected with the newly created `keenable` database and this was proved by the following output of this command:
+ <div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+After connecting with the `keenable` database, I could start working on creating  schemas for the database, which are created using the following query:
+```
+CREATE SCHEMA <Schema_Name>;
+```
+
+In the query above, `CREATE SCHEMA` is used to instruct PostgreSQL to create a schema called with a specific name assigned by the user. The expected output is supposed to be `CREATE SCHEMA`, which would mean that the schema was created successfully. 
+
+Using the `CREATE SCHEMA <Schema_Name>;` query, I was able to create the following schemas
+- **HR Schema**   
+  This schema was created using the `CREATE SCHEMA hr;`
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+- **Technical Schema**   
+  This schema was created using the `CREATE SCHEMA technical;`
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+- **Management Schema**   
+  This schema was created using the `CREATE SCHEMA management;`
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+Since just knowing that these schemas had been created was not enough, I needed to ensure that they had truly been created. To do this, I utilised the following command for listing all the schemas inside the current database of `keenable`.
+```
+\dn+
+```
+The meaning of `dn` in this context is "Directory Name", which helps us view all the schemas in the present database. The `+` on the other hand is used to display a more detailed output. After running this command, the displayed output for me was as follows: 
+<div align="center">
+
+![image](https://i.imgur.com/6cPtjnt.gif)
+</div>
+
+With all of the three schemas created successfully, the next goal was to define these created schemas. This was to be done by creating tables with relationships between eachother. As stated earlier, another goal for me in this task was to also insert some sample values into these tables as without them, it would have been difficult to understand the importance of these related tables.
+
+### 2.1. Defining HR Schema
+Under this sub-task, the ask was to create  
+
+### 2.2. Defining Technical Schema
+### 2.3. Defining Management Schema
 
 --------
 
