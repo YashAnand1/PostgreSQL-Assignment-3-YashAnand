@@ -32,11 +32,6 @@ ________________________________________________________________________________
 As a part of the third Technical Charcha session on PostgreSQL, the attendees were given an assignment comprising of 4 tasks to help gauge their understanding of PostgreSQL. This document serves as a documentation of these 4 tasks which involve the following:
 - The creation of database, schemas, tables
 - The querying of the created data
-  
-<div align="center">     
-
-![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
-   </div>
 
 These completed tasks have been compiled into this single document with practical demonstrations, in the form of video and pictures. Through this document, one can aim to better understand how to <u>form relationships between data</u>, as it can be understood as the main theme of the assignment itself. 
 
@@ -61,10 +56,18 @@ ________________________________________________________________________________
 ## Prerequisites
 </div>
 
+
+
 Before getting started with the assigned tasks, it was important to have PostgreSQL installed on my computer. In order to install this [Relational Database Management System](https://cloud.google.com/learn/what-is-a-relational-database) and its additional utilities, I had to run the following command:
 ```
 sudo apt-get install postgresql postgresql-contrib
 ```
+
+<div align="center">     
+
+![image](https://ashnik-images.s3.amazonaws.com/prod/wp-content/uploads/2021/02/20050444/Postgresql-w-400x106.png)
+   </div>
+
 Next, I ensured that the status of the installed postgreSQL service was active. This was checked by runnning the following command:
 ```
 service postgresql status
