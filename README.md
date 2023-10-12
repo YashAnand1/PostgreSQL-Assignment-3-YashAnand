@@ -18,9 +18,8 @@ ________________________________________________________________________________
     - [2.1. Defining HR Schema](#21-defining-hr-schema)
     - [2.2. Defining Technical Schema](#22-defining-technical-schema)
     - [2.3. Defining Management Schema](#23-defining-management-schema)
-  - [Task 3: Relationships](#task-3-relationships)(#managementdepartments--hremployees)
+  - [Task 3: Relationships](#task-3-relationships)
   - [Task 4: Queries \& Reporting](#task-4-queries--reporting)
-  - [CONCLUSION](#conclusion)
  
 _____________________________________________________________________________________      
 <div align="center">
@@ -450,6 +449,7 @@ In this command, we list all the tables using the `\dt`, which is used for displ
 </div>
 
 As per this task, we have been asked to create relationships between tables after they have been created. In the second task, we have already formed various relations. However, in this task, I had to create relations using the `ALTER` SQL Keyword for updating or modifying existing tables. I tried to create relations using [this tutorial by PostgreSQLTutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/). The possible relations that I had planned on creating were:
+
 - 
 
 ### `hr.employees` & `technical.projects`  
