@@ -491,7 +491,7 @@ WHERE departments.department_name = '<deptartment name>';
 The output of running this query for finding the employee working for the HR department was as follow:
   <div align="center">
 
-![image](https://i.imgur.com/6cPtjnt.gif)
+![image](https://i.imgur.com/3w22rbO.png)
 </div>
 
 --------
