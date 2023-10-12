@@ -145,34 +145,13 @@ With the `keenable` database created, this first task came to an end as it had b
 ## Task 2: Schema Design
 </div>
 
->**2. Define three schemas within the database: "hr", "technical", and "management."**   
->
->**2.1 HR Schema:**  
-Create the following tables in the "hr" schema:   
-2.1.1. "employees" to store employee information (employee_id, first_name,  
-last_name, email, hire_date).   
-2.1.2. "vacation_requests" to track employee vacation requests (request_id,
-employee_id, start_date, end_date, status). 
->
->**2.2. Technical Schema:**  
-Create the following tables in the "technical" schema:  
-2.2.1. "projects" to store project details (project_id, project_name, start_date,
-end_date).  
-2.2.2. "project_assignments" to associate employees with projects
-(assignment_id, project_id, employee_id, assignment_date).  
->
->**2.3. Management Schema:** 
-Create the following tables in the "management" schema: 
-2.3.1. "departments" to manage department information (department_id,
-department_name, location).   
-2.3.2. "department_employees" to track employee department assignments
-(assignment_id, employee_id, department_id, start_date, end_date).  
-
 In databases, schemas are ............ hierarchy
 
 Provided below in this section is the demonstration of how I completed this second task by creating schemas, adding tables to them and forming relations between the tables. Though it had not been asked in the task itself, I also inserted values to the created tables in order to be able to make a better sense of the relations created. 
 
 ### 2. Creating Schemas   
+
+>**Define three schemas within the database: "hr", "technical", and "management."**   
 
 Before getting started with creating the schemas, I had to enter the newly created `keenable` database as it had specifically been stated in the task that the schemas were to be created in this database only. In order to enter the datbase, I ran the following command from the PSQL terminal:
 ```
@@ -225,11 +204,33 @@ The meaning of `dn` in this context is "Directory Name", which helps us view all
 
 With all of the three schemas created successfully, the next goal was to define these created schemas. This was to be done by creating tables with relationships between eachother. As stated earlier, another goal for me in this task was to also insert some sample values into these tables as without them, it would have been difficult to understand the importance of these related tables.
 
-### 2.1. Defining HR Schema
+### 2.1. Defining HR Schema 
+>
+>**Create the following tables in the "hr" schema:**  
+2.1.1. "employees" to store employee information (employee_id, first_name,  
+last_name, email, hire_date).   
+2.1.2. "vacation_requests" to track employee vacation requests (request_id,
+employee_id, start_date, end_date, status). 
+
 Under this sub-task, the ask was to create  
 
-### 2.2. Defining Technical Schema
+### 2.2. Defining Technical Schema  
+> **Create the following tables in the "technical" schema:**  
+2.2.1. "projects" to store project details (project_id, project_name, start_date,
+end_date).  
+2.2.2. "project_assignments" to associate employees with projects
+(assignment_id, project_id, employee_id, assignment_date).  
+
+
 ### 2.3. Defining Management Schema
+
+>**Create the following tables in the "management" schema:** 
+2.3.1. "departments" to manage department information (department_id,
+department_name, location).   
+2.3.2. "department_employees" to track employee department assignments
+(assignment_id, employee_id, department_id, start_date, end_date).  
+
+
 
 --------
 
