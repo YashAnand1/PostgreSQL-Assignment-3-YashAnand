@@ -10,7 +10,7 @@ ________________________________________________________________________________
 ## Contents
 </div>
 
-- [Overview](#overview)
+  - [Overview](#overview)
   - [Prerequisites](#prerequisites)
   - [Task 1: Creation Of Database](#task-1-creation-of-database)
   - [Task 2: Schema Design](#task-2-schema-design)
@@ -216,12 +216,12 @@ Therefore, the SQL queries provided below were written inside the `keenable` dat
 **2.1.1. `employees` Table**
   ```
   CREATE TABLE hr.employees (
-    employee_id SERIAL PRIMARY KEY,
-    first_name VARCHAR,
-    last_name VARCHAR,
-    email VARCHAR,
-    hire_date DATE
-    );
+  employee_id SERIAL PRIMARY KEY,
+  first_name VARCHAR,
+  last_name VARCHAR,
+  email VARCHAR,
+  hire_date DATE
+  );
   ```
   **Output:** 
   <div align="center">
@@ -247,26 +247,22 @@ VALUES ('Yash', 'Anand', 'yash_anand@fosteringlinux.com', '2023-04-03'),
 
 **2.1.2. `vacation_requests` Table**
   ```
-  CREATE TABLE hr.vacation_requests (
-    request_id SERIAL PRIMARY KEY,
-    employee_id SERIAL,
-    start_date DATE,
-    end_date DATE,
-    status VARCHAR,
-    CONSTRAINT fk_employee_hr 
-    FOREIGN KEY (employee_id) 
-    REFERENCES hr.employees(employee_id)
+CREATE TABLE hr.vacation_requests (
+request_id SERIAL PRIMARY KEY,
+employee_id SERIAL,
+start_date DATE,
+end_date DATE,
+status VARCHAR,
+CONSTRAINT fk_employee_hr 
+FOREIGN KEY (employee_id) 
+REFERENCES hr.employees(employee_id)
 );
-
   ```
   Output:
   <div align="center">
 
 ![image](https://i.imgur.com/b05wsZ6.png)
 </div>
-
-An explanation of the data types used in this table are as follows:
-  - **`employee_id`**: This column was defined with the `SERIAL` data type, which is 
 
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
@@ -314,8 +310,6 @@ end_date DATE
 ![image](https://i.imgur.com/xfcJaeI.png)
 </div>
 
-  - **`employee_id`**: This column was defined with the `SERIAL` data type, which is 
-
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
 INSERT INTO technical.projects (project_name, start_date, end_date)
@@ -338,13 +332,8 @@ CONSTRAINT fk_employee_technical FOREIGN KEY (employee_id) REFERENCES hr.employe
   Output:
   <div align="center">
 
-![image](https://i.imgur.com/6cPtjnt.gif)
+![image](https://i.imgur.com/1rY5uvC.png)
 </div>
-
-An explanation of the data types used in this table are as follows:
-  - **`employee_id`**: This column was defined with the `SERIAL` data type, which is 
-  - **`first_name`**, **`last_name`**, **`email`**: This column was defined with the `VARCHAR` data type, 
-  - **`hire_date`**: This column was defined with the `DATE` data type, which allows 
 
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
@@ -352,13 +341,18 @@ INSERT INTO technical.project_assignments (assignment_date)
 VALUES ('2023-10-16'),
 ('2023-11-02'
 );
-
 ```
 
 With this, the `project_assignments` table was created successfully. In order to ensure that these tables had truly been become a part of the `hr` schema, I ran the following command to list the tables created under the `hr` schema:
 ```
 \dt technical.*
 ```
+Output:
+  <div align="center">
+
+![image](![Alt text](image.png))
+</div>
+
 In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
 
 ### 2.3. Defining Management Schema
@@ -382,11 +376,8 @@ location VARCHAR
   Output:
   <div align="center">
 
-![image](https://i.imgur.com/6cPtjnt.gif)
+![image](https://i.imgur.com/GOavoUW.png)
 </div>
-
-An explanation of the data types used in this table are as follows:
-  - **`employee_id`**: This column was defined with the `SERIAL` data type, which is 
 
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
@@ -395,12 +386,6 @@ VALUES('HR', 'Noida'),
 ('Fino', 'Gurgaon'
 );
 ```
-
-With this, the `project_assignments` table was created successfully. In order to ensure that these tables had truly been become a part of the `hr` schema, I ran the following command to list the tables created under the `hr` schema:
-```
-\dt management.*
-```
-In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
 
 
 **2.3.2. `"department_employees"` Table**
@@ -418,11 +403,9 @@ CONSTRAINT fk_department_management FOREIGN KEY (department_id) REFERENCES manag
   Output:
   <div align="center">
 
-![image](https://i.imgur.com/6cPtjnt.gif)
+![image](https://i.imgur.com/GX3irYB.png)
 </div>
 
-An explanation of the data types used in this table are as follows:
-  - **`employee_id`** **`assignment_id`**: This column was defined with the `SERIAL` data type, which is 
 
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
@@ -436,6 +419,13 @@ With this, the `project_assignments` table was created successfully. In order to
 ```
 \dt management.*
 ```
+**Output:**   
+
+  <div align="center">
+
+![image](https://i.imgur.com/8DDpDCD.png)
+</div>
+
 In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
 
 
