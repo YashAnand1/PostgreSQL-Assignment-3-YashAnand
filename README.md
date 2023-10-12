@@ -350,7 +350,7 @@ With this, the `project_assignments` table was created successfully. In order to
 Output:
   <div align="center">
 
-![image](![Alt text](image.png))
+![image](https://i.imgur.com/iGF5KOq.png)
 </div>
 
 In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
