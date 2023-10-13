@@ -258,13 +258,17 @@ VALUES ('Yash', 'Anand', 'yash_anand@fosteringlinux.com', '2023-04-03'),
 ('Amartya', 'Sen', 'amartya.sen@gmail.com', '2013-01-12'
 );
 ```
-The output of running the above query was `INSERT 0 2`, signifying that 2 rows had been successfully (0) created:
+The output of running the above query was `INSERT 0 2`, signifying that 2 rows had been successfully (0) created:   
+
+**Output:**
 <div align="center">
 
 ![image](https://i.imgur.com/YmrIs13.png)
 </div>
 
 Lastly, in order to ensure that the table had been created, I ran `SELECT * FROM hr.employees;` query for retrieving this newly creted table:
+
+**Output:**
 <div align="center">
 
 ![image](https://i.imgur.com/uF8lsOc.png)
@@ -321,7 +325,9 @@ VALUES ('2023-10-01', '2023-10-10', 'Pending'),
 ![image](https://i.imgur.com/UfCZ3g5.png)
 </div>
 
-As stated earlier, the `INSERT 0 2` output means that the query of inserting was run successfully (represented by `0`) and `2` rows were added. Given that the created `vacation_requests` table was supposed to be related to the `employees` table, it was important to ensure that this relation had truly been made and this was done by displaying the `vacation_requests` table:
+As stated earlier, the `INSERT 0 2` output means that the query of inserting was run successfully (represented by `0`) and `2` rows were added. Given that the created `vacation_requests` table was supposed to be related to the `employees` table, it was important to ensure that this relation had truly been made and this was done by displaying the `vacation_requests` table:      
+
+**Output:**
   <div align="center">
 
 ![image](https://i.imgur.com/RdD1D3r.png)
@@ -354,10 +360,9 @@ end_date).
 2.2.2. "project_assignments" to associate employees with projects
 (assignment_id, project_id, employee_id, assignment_date).  
 
-Under this sub-task, the ask was to create 2 tables, namely `projects` and `project_assignments` with the purpose of storing employee information and tracking their vacation requests, respectively. It should be noted that these tables were to be kept under the `Technical Schema`. 
+As per the second sub-task, I needed to created 2 tables inside the `technical` schema and these were to be called `projects` and `project_assignments`. Here the second table, was to reference `projects` from this schema and also the `employees` table from the `hr` schema.
 
-Therefore, the SQL queries provided below were written inside the `keenable` database using the PSQL terminal for the creation of the following tables:    
-
+Provided below is a demonstration of how both of these tables were created and how relationships were maintained between them.
 
 _________________
   <div align="center">
@@ -365,7 +370,7 @@ _________________
 ### 2.2.1. `projects` Table
 </div>
 
-The motive of creating this table was to store data related to projects
+The motive of creating this table was to store data related to projects, such as `project_id`, `project_name`, `start_date` and `end_date`. In order to create such a table, I wrote the following query for creating a table called `projects` while placing it under the `technical` schema.
 
 ```
 CREATE TABLE technical.projects (
@@ -378,21 +383,44 @@ end_date DATE
   **Output:**
   <div align="center">
 
-![image](https://i.imgur.com/xfcJaeI.png)
+![image](https://i.imgur.com/j9GCQZS.png)
 </div>
 
-In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
+The `CREATE TABLE` displayed as the output after running this query, signified that the `projects` table had been created successfully. An explanation of the data types used in the above query is as follows:
+- **`PRIMARY KEY`**, **`SERIAL`**: The `project_id` column was was given this data type in order to allow PostgreSQL to automatically assign unique integer values as identifiers for each row, that would be containing project related data.
+- **`VARCHAR`**: This data type was solely and specifically used for the `project_name` column, in order to store the names of the related projects that were to be added into this table.
+- **`DATE`**: The `end_date` and `start_date` columns were assigned to store the data using this data type, in the format of `YYYY-MM-DD`.
+
+After the creation of the table, I proceeded with inserting values to this newly created `projects` table for making sense of the table when data retrieval was going to be done. This was done by writing the following query: 
 ```
 INSERT INTO technical.projects (project_name, start_date, end_date)
 VALUES ('IMS', '2022-03-25', '2023-10-12'),
 ('FINO', '2022-06-05', '2022-11-03'
 );
 ```
+  **Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/VHrIzJL.png)
+</div>
+
+As stated in the previous section, the meaning of `INSERT 0 2` is that `2` rows have been added to the metioned table, successfully (`0`). With the `projects` table containing some sample data, I could now retrieve the data belonging to this table using the **`SELECT * FROM technical.projects;`** query for ensuring that the data had been entered correctly:
+
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/LIs7buJ.png)
+</div>
+Given that the data of all the columns that were added to the table had been retrieved successfully, from the `projects` table that was part of the `technical` schema, this sub-task came to a conclusion.
+
 _________________
   <div align="center">
 
 ### 2.2.2. `project_assignments` Table
+
 </div>
+
+As per the task, a table called `project_assignments` was also to be created under the `technical` schema. It was to act as a `child table` that would be referencing parent tables of `technical.projects` and `hr.employees`, in order to create relations between these 3 tables. The goal of making this table was to keep track of all the project assignments that have been assigned to the employees. To create a table like this, the following query was written:
 
   ```
 CREATE TABLE technical.project_assignments (
@@ -400,35 +428,60 @@ assignment_id SERIAL PRIMARY KEY,
 project_id SERIAL,
 employee_id SERIAL,
 assignment_date DATE,
-CONSTRAINT fk_project_technical FOREIGN KEY (project_id) REFERENCES technical.projects(project_id),
-CONSTRAINT fk_employee_technical FOREIGN KEY (employee_id) REFERENCES hr.employees(employee_id)
+FOREIGN KEY (project_id) 
+REFERENCES technical.projects(project_id),
+FOREIGN KEY (employee_id) 
+REFERENCES hr.employees(employee_id)
 );
   ```
   **Output:**
   <div align="center">
 
-![image](https://i.imgur.com/1rY5uvC.png)
+![image](https://i.imgur.com/hl4zBwM.png)
 </div>
 
-In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
+A brief explanation of the above query and the data types utilised while writing it, is as follows:
+- **`PRIMARY KEY`**: In this table, the `assignment_id` column was chosen to act as the unique identifier of each row that would be containing related data.
+- **`SERIAL`**: This data type was utilised by the primary key of this table to ensure that unique integers would be added to each row to better identify data. The foreign keys like `project_id` and `employee_id` were also assigned this data type in their respective tables and that is why, their data type was kept as same.
+-  **`DATE`**: Used as the data type for the `assignment_date` column, which was created to store data related to dates.
+
+Once this table had been created, I also wrote the following query for inserting data into the `project_assignments` table, so that verifying its relationship with the `employees` and `projects` table could be easier:
 ```
 INSERT INTO technical.project_assignments (assignment_date)
 VALUES ('2023-10-16'),
 ('2023-11-02'
 );
 ```
+**Output:**
+  <div align="center">
 
-With this, the `project_assignments` table was created successfully. In order to ensure that these tables had truly been become a part of the `hr` schema, I ran the following command to list the tables created under the `hr` schema:
+![image](https://i.imgur.com/xRMoxiI.png)
+</div>
+
+It should be noted how data was inserted into only a single column in the above query. This was due to all the other columns of `SERIAL` data type, namely `assignment_id`, `project_id` and `employee_id`, already automatically incrementing unique integers for each row that was added. In order to ensure that the relationships were being correctly in this table, I ran the `SELECT * FROM technical.project_assignments;` query to display the created table:
+
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/2S6zTjt.png)
+</div>
+
+Hence, it was verified that the `project_assignments` table had been created successfully, while perfectly maintaining all the relationships that had been created through the use of foreign keys.
+
+
+**Ensuring tables are part of Technical Schema**
+
+Although I had ensured that the foreign-key relationships in this table were being maintained as I wanted them to be, it was also necessary to check that the `projects` and `projects_assignmentss` were truly part of the `techinical` schema.  To verify this, I had to run the following command:
 ```
 \dt technical.*
 ```
 **Output:**
   <div align="center">
 
-![image]()
+![image](https://i.imgur.com/mfdY9R1.png)
 </div>
 
-In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
+Through this command, I was able to list all the tables which were a part of the `technical` schema and also verify that the `projects` and `project_assignments` tables were truly part of the same schema.
 
 _________________
   <div align="center">
@@ -437,19 +490,22 @@ _________________
 
 </div>
 
->**Create the following tables in the "management" schema:** 
+>**Create the following tables in the "management" schema:**  
 2.3.1. "departments" to manage department information (department_id,
 department_name, location).   
 2.3.2. "department_employees" to track employee department assignments
 (assignment_id, employee_id, department_id, start_date, end_date).  
 
+This third sub-task required the creation of 2 tables called `departments` and `department_employees`. These tables were to be created inside the `management` schema. The second table was to form relationship with the `departments` table from the same schema and also with the `employees` table from the `hr` schema.
 
+A demonstration of how I was able to create these 2 tables and form the required relationships is being provided below.
 _________________
   <div align="center">
 
 ### 2.3.1. `departments` Table
-
 </div>
+
+The goal of creating a table called `departments`, which would store information on the `department_id`, `department_name` and its `location`. In order to create a table such as this, I wrote the following query: 
 
 ```
 CREATE TABLE management.departments (
@@ -457,13 +513,19 @@ department_id SERIAL PRIMARY KEY,
 department_name VARCHAR,
 location VARCHAR
 );
-
   ```
   **Output:**
   <div align="center">
 
 ![image](https://i.imgur.com/GOavoUW.png)
 </div>
+
+A brief explanation of the above query and the data types utilised while writing it, is as follows:
+- **`PRIMARY KEY`**: In this table, the `assignment_id` column was chosen to act as the unique identifier of each row that would be containing related data.
+- **`SERIAL`**: This data type was utilised by the primary key of this table to ensure that unique integers would be added to each row to better identify data. The foreign keys like `project_id` and `employee_id` were also assigned this data type in their respective tables and that is why, their data type was kept as same.
+-  **`DATE`**: Used as the data type for the `assignment_date` column, which was created to store data related to dates.
+
+Once this table had been created, I also wrote the following query for inserting data into the `project_assignments` table, so that verifying its relationship with the `employees` and `projects` table could be easier:
 
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
@@ -472,10 +534,26 @@ VALUES('HR', 'Noida'),
 ('Fino', 'Gurgaon'
 );
 ```
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/78bswI5.png)
+</div>
+
+As stated in the previous section, the meaning of `INSERT 0 2` is that `2` rows have been added to the metioned table, successfully (`0`). With the `projects` table containing some sample data, I could now retrieve the data belonging to this table using the **`SELECT * FROM technical.projects;`** query for ensuring that the data had been entered correctly:
+
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/nTnJYGv.png)
+</div>
+Given that the data of all the columns that were added to the table had been retrieved successfully, from the `projects` table that was part of the `technical` schema, this sub-task came to a conclusion.
+
+
 _________________
   <div align="center">
 
-### 2.3.2. `"department_employees"` Table
+### 2.3.2. `department_employees` Table
 
 </div>
 
@@ -486,14 +564,16 @@ employee_id SERIAL,
 department_id SERIAL,
 start_date DATE,
 end_date DATE,
-CONSTRAINT fk_employee_management FOREIGN KEY (employee_id) REFERENCES hr.employees(employee_id),
-CONSTRAINT fk_department_management FOREIGN KEY (department_id) REFERENCES management.departments(department_id)
+FOREIGN KEY (employee_id) 
+REFERENCES hr.employees(employee_id),
+FOREIGN KEY (department_id) 
+REFERENCES management.departments(department_id)
 );
   ```
   **Output:**
   <div align="center">
 
-![image](https://i.imgur.com/GX3irYB.png)
+![image]()
 </div>
 
 
