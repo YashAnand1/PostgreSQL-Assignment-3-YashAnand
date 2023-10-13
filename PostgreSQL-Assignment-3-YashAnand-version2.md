@@ -10,21 +10,28 @@ ________________________________________________________________________________
 ## Contents
 </div>
 
-  - [Overview](#overview)
-  - [Prerequisites](#prerequisites)
-  - [Task 1: Creation Of Database](#task-1-creation-of-database)
-  - [Task 2: Schema Design](#task-2-schema-design)
-    - [2. Creating Schemas](#2-creating-schemas)
-    - [2.1. Defining HR Schema](#21-defining-hr-schema)
-    - [2.2. Defining Technical Schema](#22-defining-technical-schema)
-    - [2.3. Defining Management Schema](#23-defining-management-schema)
-  - [Task 3: Relationships](#task-3-relationships)
-  - [Task 4: Queries \& Reporting](#task-4-queries--reporting)
+  - [**Overview**](#overview)
+  - [**Prerequisites**](#prerequisites)
+  - [**Task 1: Creation Of Database**](#task-1-creation-of-database)
+  - [**Task 2: Schema Design**](#task-2-schema-design)
+    - [**2.1. Defining HR Schema**](#21-defining-hr-schema)
+    - [2.1.1. `employees` Table](#211-employees-table)
+    - [2.1.2. `vacation_requests` Table](#212-vacation_requests-table)
+    - [**2.2. Defining Technical Schema**](#22-defining-technical-schema)
+    - [2.2.1. `projects` Table](#221-projects-table)
+    - [2.2.2. `project_assignments` Table](#222-project_assignments-table)
+    - [**2.3. Defining Management Schema**](#23-defining-management-schema)
+    - [2.3.1. `departments` Table](#231-departments-table)
+    - [2.3.2. `"department_employees"` Table](#232-department_employees-table)
+  - [**Task 3: Relationships**](#task-3-relationships)
+    - [`hr.employees` \& `technical.projects`](#hremployees--technicalprojects)
+    - [`management.departments` \& `hr.employees`](#managementdepartments--hremployees)
+  - [**Task 4: Queries \& Reporting**](#task-4-queries--reporting)
  
 _____________________________________________________________________________________      
 <div align="center">
    
-# Overview 
+# **Overview** 
 </div>
 
 As a part of the third Technical Charcha session on PostgreSQL, the attendees were given an assignment comprising of 4 tasks to help gauge their understanding of PostgreSQL. This document serves as a documentation of these 4 tasks which involve the following:
@@ -51,7 +58,7 @@ ________________________________________________________________________________
 
 <div align="center">
    
-## Prerequisites
+## **Prerequisites**
 </div>
 
 
@@ -85,7 +92,7 @@ In the coming sections, the following assigned tasks will be performed and demon
 --------
 <div align="center">
 
-## Task 1: Creation Of Database
+## **Task 1: Creation Of Database**
 </div>
 
 > Create a new PostgreSQL database named "keenable"         
@@ -140,7 +147,7 @@ With the `keenable` database created, this first task came to an end as it had b
 
 <div align="center">
    
-## Task 2: Schema Design
+## **Task 2: Schema Design**
 </div>
 
 >**Define three schemas within the database: "hr", "technical", and "management."**   
@@ -203,7 +210,7 @@ With all of the three schemas created successfully, the next goal was to define 
   <div align="center">
 
 ______________
-### 2.1. Defining HR Schema 
+### **2.1. Defining HR Schema**
 >
 </div>
 
@@ -218,7 +225,7 @@ Therefore, the SQL queries provided below were written inside the `keenable` dat
 __________________
   <div align="center">
 
-### **2.1.1. `employees` Table**
+### 2.1.1. `employees` Table
 </div>
 
   In the query mentioned below, I created the `employees` table as a part of the `hr` schema using `CREATE TABLE hr.employees`. Here, I capitalised the SQL keywords that have been built in PostgreSQL but kept anything else added by me - such as names of columns - as lower-case. Though this is not an enforced rule, it is considered as a good practice for making the queries easier to understand.
@@ -267,7 +274,7 @@ Through the above query, we asked PostgreSQL to display all columns from the emp
 _________________
   <div align="center">
 
-### **2.1.2. `vacation_requests` Table**
+### 2.1.2. `vacation_requests` Table
 </div>
 
 
@@ -322,6 +329,7 @@ As stated earlier, the `INSERT 0 2` output means that the query of inserting was
 
 Even though we had not mentioned the `request_id` or `employee_id` while inserting the values, the output of running `SELECT * FROM hr.vacation_requests;` included these 2 columns, further proving that the relationship had truly been created between the `employees` and `vacation_requests` table. 
 
+**Ensuring tables are part of HR Schema**   
 With this, the `vacation_requests` table was created successfully. In order to ensure that these tables had truly become a part of the `hr` schema, I ran the following command to list the tables created under the `hr` schema:
 ```
 \dt hr.*
@@ -337,7 +345,7 @@ In this command, we list all the tables using the `\dt`, which is used for displ
 _________________
   <div align="center">
 
-### 2.2. Defining Technical Schema  
+### **2.2. Defining Technical Schema**  
 </div>
 
 > **Create the following tables in the "technical" schema:**  
@@ -354,7 +362,7 @@ Therefore, the SQL queries provided below were written inside the `keenable` dat
 _________________
   <div align="center">
 
-### **2.2.1. `projects` Table**
+### 2.2.1. `projects` Table
 </div>
 
 The motive of creating this table was to store data related to projects
@@ -383,7 +391,7 @@ VALUES ('IMS', '2022-03-25', '2023-10-12'),
 _________________
   <div align="center">
 
-### **2.2.2. `project_assignments` Table**
+### 2.2.2. `project_assignments` Table
 </div>
 
   ```
@@ -422,7 +430,12 @@ With this, the `project_assignments` table was created successfully. In order to
 
 In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
 
-### 2.3. Defining Management Schema
+_________________
+  <div align="center">
+
+### **2.3. Defining Management Schema**
+
+</div>
 
 >**Create the following tables in the "management" schema:** 
 2.3.1. "departments" to manage department information (department_id,
@@ -431,8 +444,14 @@ department_name, location).
 (assignment_id, employee_id, department_id, start_date, end_date).  
 
 
-**2.3.1. `departments` Table**
-  ```
+_________________
+  <div align="center">
+
+### 2.3.1. `departments` Table
+
+</div>
+
+```
 CREATE TABLE management.departments (
 department_id SERIAL PRIMARY KEY,
 department_name VARCHAR,
@@ -453,9 +472,13 @@ VALUES('HR', 'Noida'),
 ('Fino', 'Gurgaon'
 );
 ```
+_________________
+  <div align="center">
 
+### 2.3.2. `"department_employees"` Table
 
-**2.3.2. `"department_employees"` Table**
+</div>
+
   ```
 CREATE TABLE management.department_employees (
 assignment_id SERIAL PRIMARY KEY,
@@ -502,7 +525,7 @@ In this command, we list all the tables using the `\dt`, which is used for displ
 
 <div align="center">
 
-## Task 3: Relationships 
+## **Task 3: Relationships** 
 </div>
 
 As per this task, we have been asked to create relationships between tables after they have been created. In the second task, we have already formed various relations. However, in this task, I had to create relations using the `ALTER` SQL Keyword for updating or modifying existing tables. I tried to create relations using [this tutorial by PostgreSQLTutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/). The possible relations that I had planned on creating were:
@@ -533,7 +556,7 @@ REFERENCES management.departments(department_id);
 
 <div align="center">
    
-## Task 4: Queries & Reporting
+## **Task 4: Queries & Reporting**
 
 </div>
 
