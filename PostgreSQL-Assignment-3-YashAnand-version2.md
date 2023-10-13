@@ -246,10 +246,10 @@ hire_date DATE
 </div>
 
 
-  Inside `hr.employees`, I also created columns with specific data-types, which act as a constraint and decide what kind of data is to be allowed in a column. An explanation of the data types used in this table are as follows:
-  - **`employee_id`**: This column was defined with the `SERIAL` data type, which is basically an integer that automatically adds 1 to the rows. Additionally, this column was also made the primary key as a unique identifier of this table, which was later used for forming relations with related tables.
-  - **`first_name`**, **`last_name`**, **`email`**: This column was defined with the `VARCHAR` data type, without denoting a character length limit in the form of `VARCHAR(n)`. As explained [here by Hevodata](https://hevodata.com/learn/postgresql-varchar/#:~:text=In%20the%20PostgreSQL%20Varchar%20data,by%20PostgreSQL%20Varchar(n).), "If n is not specified, it defaults to a character of infinite length", meaning that these columns could store values with characters upto 255 bytes.
-  - **`hire_date`**: This column was defined with the `DATE` data type, which allows the storage of date in the format of `YYYY-MM-DD`. 
+Inside `hr.employees`, I also created columns with specific data-types, which act as a constraint and decide what kind of data is to be allowed in a column. An explanation of the data types used in this table are as follows:
+- **`employee_id`**: This column was defined with the `SERIAL` data type, which is basically an integer that automatically adds 1 to the rows. Additionally, this column was also made the primary key as a unique identifier of this table, which was later used for forming relations with related tables.
+- **`first_name`**, **`last_name`**, **`email`**: This column was defined with the `VARCHAR` data type, without denoting a character length limit in the form of `VARCHAR(n)`. As explained [here by Hevodata](https://hevodata.com/learn/postgresql-varchar/#:~:text=In%20the%20PostgreSQL%20Varchar%20data,by%20PostgreSQL%20Varchar(n).), "If n is not specified, it defaults to a character of infinite length", meaning that these columns could store values with characters upto 255 bytes.
+- **`hire_date`**: This column was defined with the `DATE` data type, which allows the storage of date in the format of `YYYY-MM-DD`. 
 
 In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
@@ -521,13 +521,11 @@ location VARCHAR
 </div>
 
 A brief explanation of the above query and the data types utilised while writing it, is as follows:
-- **`PRIMARY KEY`**: In this table, the `assignment_id` column was chosen to act as the unique identifier of each row that would be containing related data.
-- **`SERIAL`**: This data type was utilised by the primary key of this table to ensure that unique integers would be added to each row to better identify data. The foreign keys like `project_id` and `employee_id` were also assigned this data type in their respective tables and that is why, their data type was kept as same.
--  **`DATE`**: Used as the data type for the `assignment_date` column, which was created to store data related to dates.
+- **`PRIMARY KEY`**, **`SERIAL`**: The `department_id` columns was chosen as the `PRIMARY KEY` of the `SERIAL` data type, in order to keep the data entered in this table uniquely identifiable.
+-  **`VARCHAR`**: This data type was used for the `department_name` and `location` columns, meaning that the data entered to these columns could store character values upto 255.  
+   
+After the creation of this table, the following query was written by me for inserting data into this newly created table called `departments`, so that varifying that the data was correctly storing data could be possible:
 
-Once this table had been created, I also wrote the following query for inserting data into the `project_assignments` table, so that verifying its relationship with the `employees` and `projects` table could be easier:
-
-In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
 ```
 INSERT INTO management.departments (department_name, location)
 VALUES('HR', 'Noida'),
@@ -540,15 +538,14 @@ VALUES('HR', 'Noida'),
 ![image](https://i.imgur.com/78bswI5.png)
 </div>
 
-As stated in the previous section, the meaning of `INSERT 0 2` is that `2` rows have been added to the metioned table, successfully (`0`). With the `projects` table containing some sample data, I could now retrieve the data belonging to this table using the **`SELECT * FROM technical.projects;`** query for ensuring that the data had been entered correctly:
+The output of `INSERT 0 2` meant that `2` rows had been successfully (`0`) created. To verify that the data was being stored inside table correctly, I tried retrieving the stored data using the **`SELECT * FROM management.departments;`** query and its output was as follows:
 
 **Output:**
   <div align="center">
 
 ![image](https://i.imgur.com/nTnJYGv.png)
 </div>
-Given that the data of all the columns that were added to the table had been retrieved successfully, from the `projects` table that was part of the `technical` schema, this sub-task came to a conclusion.
-
+As it could be seen that the stored data was being stored correctly, I was able to successfully verify that this table had been correctly created.
 
 _________________
   <div align="center">
@@ -557,7 +554,9 @@ _________________
 
 </div>
 
-  ```
+In order to create the `department_employees` table, we needed to form relationships with the `employee` table from the `hr` schema and the `departments` table that would created in the preious section. In order to form the required relations, foreign keys were utilised by writing the following query:
+
+```
 CREATE TABLE management.department_employees (
 assignment_id SERIAL PRIMARY KEY,
 employee_id SERIAL,
@@ -569,23 +568,41 @@ REFERENCES hr.employees(employee_id),
 FOREIGN KEY (department_id) 
 REFERENCES management.departments(department_id)
 );
-  ```
+```
   **Output:**
   <div align="center">
 
-![image]()
+![image](https://i.imgur.com/smZpPv9.png)
 </div>
 
-
-In order to make sense of the created table when it would be retrieved later on, values were added to it using the following query:
+With the creation of the table verified by the `CREATE TABLE` output, it was important to also verify that the table could correctly stored data, while maintaining the relationships through foreign keys. In order to do this, I inserted data into this table by writing the following query:
 ```
 INSERT INTO management.department_employees (start_date, end_date)
 VALUES ('2023-10-01', '2023-10-31'),
 ('2023-03-10', '2023-05-31'
 );
 ```
+**Output:**
+  <div align="center">
 
-With this, the `project_assignments` table was created successfully. In order to ensure that these tables had truly been become a part of the `hr` schema, I ran the following command to list the tables created under the `hr` schema:
+![image](https://i.imgur.com/DsRe8Th.png)
+</div>
+
+Given that columns such as `assignment_id`, `employee_id` and `department_id` were columns of `SERIAL` data type, it was not required to enter data for these columns since their values were to be added automatically by PostgreSQL. However, I did insert some sample data into the `start_date` and `end_date` columns.
+
+To ensure that the data was being stored correctly, I wrote the `SELECT * FROM management.department_employees` query for displaying the stored data. The output of this query was as follows:  
+
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/XWHvlqq.png)
+</div>
+
+The above output helped me verify that this table had been created correctly and that the relationships between `management` schema's `department_employees` and `departments`, along with `hr` schema's `employees` table was being maintained correctly.
+
+**Ensuring tables are part of Technical Schema**
+
+To verify that the created tables of `department_employees` and `departments` were part of the same `management` schema, I ran the following command to list all the tables under the mentioned schema:
 ```
 \dt management.*
 ```
@@ -596,41 +613,45 @@ With this, the `project_assignments` table was created successfully. In order to
 ![image](https://i.imgur.com/8DDpDCD.png)
 </div>
 
-In this command, we list all the tables using the `\dt`, which is used for displaying tables. However, we add a wildcard (*) after `hr.` to list all tables which come under this schema.
+The above `\dt` command helped me list all the tables which came under the `management` schema and hence, verified that I had successfully created the `department_employees` and `departments` under this schema.
 
+Additionally, this also marked the closure of Task 2 as all of the mentioned tables had been created under their respective schemas. In the following section, I have demonstrated how I was able to form new relations between the tables that had been created under this very task.
 
 --------
-
-
 
 <div align="center">
 
 ## **Task 3: Relationships** 
 </div>
 
-As per this task, we have been asked to create relationships between tables after they have been created. In the second task, we have already formed various relations. However, in this task, I had to create relations using the `ALTER` SQL Keyword for updating or modifying existing tables. I tried to create relations using [this tutorial by PostgreSQLTutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/). The possible relations that I had planned on creating were:
+As per this task, we have been asked to create relationships between tables after they have been created. In the second task, we have already formed various relations. However, in this task, I had to create relations using the `ALTER` SQL Keyword for updating or modifying existing tables because these tables had already been crated. 
 
-- 
+In order to create relations after the tables had been created, I utilised [this tutorial by PostgreSQLTutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/) for establishing new relationships between the existing tables for enhancing their referential integrity. Provided below are some possible relationships that I was able to create between the tables:
 
-### `hr.employees` & `technical.projects`  
+1. **`project_assignment` table with `projects` table** 
+**Use Case**: For finding assignment details from the `projects` table
 
-Suppose you want to create a relationship that associates employees with the projects they're assigned to. This would involve linking the "employee_id" in "hr.employees" with the "employee_id" in "technical.project_assignments." You can do this using ALTER TABLE statements.    
-
+In order to establish a relationship between and link the `project_assignment` table with `projects` table, I wrote the following query:    
 ```
 ALTER TABLE technical.projects
-ADD COLUMN department_id SERIAL;
-
+ADD CONSTRAINT fk_project_id
+FOREIGN KEY project_id
+REFERENCES technical.projects(project_id);
 ```
 
-###  `management.departments` & `hr.employees`
-If you want to associate employees with their respective departments, you can create a new relationship between "management.departments" and "hr.employees" using the "department_id" column.
+Given that the above mentioned key
 
-```
-ALTER TABLE hr.employees
-ADD CONSTRAINT fk_department_management 
-FOREIGN KEY (department_id)
-REFERENCES management.departments(department_id);
-```
+1. **`project_assignment` table with `employees` table** 
+**Use Case**: To find data related to assignments from the `employees` table
+
+1. **`department_employees` table with `employees` table** 
+**Use Case**: To find the respective departments of employees from the `employees` table
+
+1. **`department_employees` table with `departments` table** 
+**Use Case**: For finding respective employees of departments in the `departments` table. 
+
+1. **`vacation_requests` table with `employees` table** 
+**Use Case**: For learning about the vacation requests of employees from the `employees` table
 
 --------
 
@@ -640,28 +661,34 @@ REFERENCES management.departments(department_id);
 
 </div>
 
->Write SQL queries to retrieve information such as:
-4.1. Employees in a specific department
-4.2. Projects assigned to an employee
-4.3. Vacation requests for an employee
+>Write SQL queries to retrieve information such as:     
+4.1. Employees in a specific department     
+4.2. Projects assigned to an employee     
+4.3. Vacation requests for an employee      
 
+<div align="center">
 
-As a part of the final and fourth task, we were assigned to run queries for retrieving the following information:
+### 4.1. Employees in a specific department   
 
-**4.1. Employees in a specific department**
-Such a query could be deemed very useful for finding the employees from their respective departments and in order to find such an information, the following query was written:
+</div>
 
+In order to create a query that would help retrieve the name of employees from a specific department, I was able to come up with a query. However, an issue with it was that it could not be used for 'finding' data from a specific keyword. In order to counter this, I did some reasearch and came to learn about the `WHERE` keyword of SQL from this [W3School Tutorial](https://www.w3schools.com/sql/sql_where.asp). 
+
+Therefore, this usage of this keyword was included in my query as the last line of the statement for allowing data retrieval of employee names based on a specific department. The created query is as follows:
 ```
-SELECT employees.first_name, employees.last_name, departments.department_name
+SELECT hr.employees.employee_id, hr.employees.first_name, hr.employees.last_name, management.departments.department_id, management.departments.department_name
 FROM hr.employees
-JOIN management.department_employees ON employees.employee_id = department_employees.employee_id
-JOIN management.departments ON department_employees.department_id = departments.department_id
-WHERE departments.department_name = '<deptartment name>';
+JOIN management.department_employees ON hr.employees.employee_id = management.department_employees.employee_id
+JOIN management.departments ON management.department_employees.department_id = management.departments.department_id;
+WHERE management.departments.department_name = '<department name>';
 ```
-The output of running this query for finding the employee working for the HR department was as follow:
+In the query mentioned above, it was made possible to retrieve the names of employees working from their respective department names. An example of running the above query could be trying to view all the employees working in the HR department. For this, the `'<department name'` was replaced with `'HR'` and I was able to successfully retrieve the name of the employee working in the HR department:     
   <div align="center">
 
-![image](https://i.imgur.com/6cPtjnt.gif)
+![image](https://i.imgur.com/UkqRuk6.png)
 </div>
+
+**4.2. Projects assigned to an employee**
+
 
 --------
