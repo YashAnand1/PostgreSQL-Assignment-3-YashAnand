@@ -10,6 +10,7 @@ ________________________________________________________________________________
 ## Contents
 </div>
 
+
   - [**Overview**](#overview)
   - [**Prerequisites**](#prerequisites)
   - [**Task 1: Creation Of Database**](#task-1-creation-of-database)
@@ -28,7 +29,7 @@ ________________________________________________________________________________
     - [4.1. Employees in a specific department](#41-employees-in-a-specific-department)
     - [4.2. Projects assigned to an employee](#42-projects-assigned-to-an-employee)
     - [4.3. Vacation requests for an employee](#43-vacation-requests-for-an-employee)
-  - [Conclusion](#conclusion)
+  - [**Conclusion**](#conclusion)
  
 _____________________________________________________________________________________      
 <div align="center">
@@ -794,7 +795,7 @@ _____________________________
 
   <div align="center">
 
-## Conclusion
+## **Conclusion**
 </div>
 
 After the completion of these 4 tasks, which greatly depended on building relationships between tables, I was able to learn and understand the concept of primary keys, foreign keys, constraints, joins and alters. Through this document, I was also able to demonstrate and perform the assigned tasks, which helped me gain a lot of practical understanding of PostgreSQL and SQL.
