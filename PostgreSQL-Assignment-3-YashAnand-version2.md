@@ -22,11 +22,13 @@ ________________________________________________________________________________
     - [2.2.2. `project_assignments` Table](#222-project_assignments-table)
     - [**2.3. Defining Management Schema**](#23-defining-management-schema)
     - [2.3.1. `departments` Table](#231-departments-table)
-    - [2.3.2. `"department_employees"` Table](#232-department_employees-table)
+    - [2.3.2. `department_employees` Table](#232-department_employees-table)
   - [**Task 3: Relationships**](#task-3-relationships)
-    - [`hr.employees` \& `technical.projects`](#hremployees--technicalprojects)
-    - [`management.departments` \& `hr.employees`](#managementdepartments--hremployees)
   - [**Task 4: Queries \& Reporting**](#task-4-queries--reporting)
+    - [4.1. Employees in a specific department](#41-employees-in-a-specific-department)
+    - [4.2. Projects assigned to an employee](#42-projects-assigned-to-an-employee)
+    - [4.3. Vacation requests for an employee](#43-vacation-requests-for-an-employee)
+  - [Conclusion](#conclusion)
  
 _____________________________________________________________________________________      
 <div align="center">
@@ -624,34 +626,83 @@ Additionally, this also marked the closure of Task 2 as all of the mentioned tab
 ## **Task 3: Relationships** 
 </div>
 
+>Establish appropriate foreign key relationships between tables to maintain
+referential integrity. For example, link "project_assignments" to "projects" and
+"employees."
+
 As per this task, we have been asked to create relationships between tables after they have been created. In the second task, we have already formed various relations. However, in this task, I had to create relations using the `ALTER` SQL Keyword for updating or modifying existing tables because these tables had already been crated. 
 
 In order to create relations after the tables had been created, I utilised [this tutorial by PostgreSQLTutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/) for establishing new relationships between the existing tables for enhancing their referential integrity. Provided below are some possible relationships that I was able to create between the tables:
 
-1. **`project_assignment` table with `projects` table** 
+**1. `project_assignment` table with `projects` table**  
 **Use Case**: For finding assignment details from the `projects` table
 
 In order to establish a relationship between and link the `project_assignment` table with `projects` table, I wrote the following query:    
 ```
 ALTER TABLE technical.projects
-ADD CONSTRAINT fk_project_id
-FOREIGN KEY project_id
-REFERENCES technical.projects(project_id);
+ADD assignment_id SERIAL;
+ALTER TABLE technical.projects
+ADD CONSTRAINT fk_assignment_id
+FOREIGN KEY (assignment_id)
+REFERENCES technical.project_assignments(assignment_id);
 ```
+**Output:**
+  <div align="center">
 
-Given that the above mentioned key
+![image](https://i.imgur.com/2mp7HdN.png)
+</div>
 
-1. **`project_assignment` table with `employees` table** 
+In the above query, I first added a new column called `assignment_id` to the `projects` table, with the `SERIAL` data type. This was done because before defining the foreign key, its existence in the table was more important. The first `ALTER TABLE` output helped me understand that the column had been successfully created.
+
+In the second part of the query, I worked on defining a constraint and the foreign key that was to be referenced from the `project_assignments` table. The second `ALTER TABLE` as the output of the second part of the query represented that the foreign key relations had been created successfully between the `technical.projects` and `technical.project_assignments`. 
+
+In order to ensure that this relationship had been created, I ran the following `JOIN` query:
+```
+SELECT * FROM technical.projects
+JOIN technical.project_assignments ON technical.project_assignments.assignment_id = technical.projects.assignment_id; 
+```
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/r9QvWtm.png)
+</div>
+
+Given that the joining of the `technical.projects` and `technical.project_assignments` had been done, I was able to conclude that I had successfully linked `project_assignments` with the `projects` table. 
+
+**2. `project_assignment` table with `employees` table**    
 **Use Case**: To find data related to assignments from the `employees` table
 
-1. **`department_employees` table with `employees` table** 
-**Use Case**: To find the respective departments of employees from the `employees` table
+Based on the above use-case, I wrote the following query for linking the `project_assignment` table with the `employees` table:
+```
+ALTER TABLE hr.employees
+ADD project_id SERIAL;
+ALTER TABLE hr.employees
+ADD CONSTRAINT fk_project_id
+FOREIGN KEY (project_id)
+REFERENCES technical.projects(project_id);
+```
+**Output:**
+  <div align="center">
 
-1. **`department_employees` table with `departments` table** 
-**Use Case**: For finding respective employees of departments in the `departments` table. 
+![image](https://i.imgur.com/gYkilsm.png)
+</div>
 
-1. **`vacation_requests` table with `employees` table** 
-**Use Case**: For learning about the vacation requests of employees from the `employees` table
+Though a link had already been made earlier by using `employee_id` of the `hr.employees` table as the foreign key in the `project_assignment` table, I needed to create a reverse-reference by using the `assignment_id` as the foreign key in the `employees` table.
+
+To do this, I first added a column of `SERIAL` data type to the `employees` table in the first part of the query mentioned above. Once the `ALTER TABLE` output had been displayed, signifying the successful addition of the column, I worked on adding the `assignment_id` as the foreign key which referenced to the `project_assignment` table. The second `ALTER TABLE` output showcased that the foreign key had been added successfuly.
+
+In order to ensure that the link of `project_assignment` table had been made with the `employees` table, I joied the 2 tables by using the foreign key of `assignment_id` as the common column. This was done by writting the following `join` query:
+```
+SELECT * FROM hr.employees
+JOIN technical.project_assignments ON technical.project_assignments.assignment_id = hr.employees.project_id;
+```
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/OL1JFZY.png)
+</div>
+
+GIven that I was able to successfully join the `employees` and `project_assignments` table, it could be concluded that I was able to successfully form relations from `project_assignments` with the `employees` table.    
 
 --------
 
@@ -683,12 +734,69 @@ JOIN management.departments ON management.department_employees.department_id = m
 WHERE management.departments.department_name = '<department name>';
 ```
 In the query mentioned above, it was made possible to retrieve the names of employees working from their respective department names. An example of running the above query could be trying to view all the employees working in the HR department. For this, the `'<department name'` was replaced with `'HR'` and I was able to successfully retrieve the name of the employee working in the HR department:     
+
+**Output:**
   <div align="center">
 
-![image](https://i.imgur.com/UkqRuk6.png)
+![image](https://i.imgur.com/KJERb3c.png)
 </div>
 
-**4.2. Projects assigned to an employee**
+Please note that in the above screenshot, the lines appear to be flowing into the next line due to the zooming-in of the terminal. The query mentioned before was only used for retrieving the name of the employee working in the HR Department. 
 
+  <div align="center">
+
+### 4.2. Projects assigned to an employee
+</div>
+
+Quite like the previous query, here we were supposed to write a query for retrieving the names of the projects assigned to a specific employee, from their names. In order to retrieve a data such as this, I wrote the following query: 
+
+```
+SELECT hr.employees.employee_id, hr.employees.first_name, hr.employees.last_name, technical.projects.project_id, technical.projects.project_name
+FROM technical.projects
+JOIN technical.project_assignments ON technical.project_assignments.project_id = technical.projects.project_id
+JOIN hr.employees ON technical.project_assignments.employee_id = hr.employees.employee_id
+WHERE hr.employees.first_name = `'<first name>'` AND hr.employees.last_name = `'<last name>'`;
+```
+
+An another way of writing this query could have been retrieving project names from `employee_id` but for the sake of simplicity, I chose the above method for querying. As an example, if we were to find the projects assigned to 'Yash Anand', then the above query could be modified to add this 'Yash' as the `first name` and 'Anand' as the `last name` for retrieving the names of the projects from this query. The output of the modified query would therefore be as follows:     
+
+**Output:**
+  <div align="center">
+
+![image](https://i.imgur.com/xjIJSyv.png)
+</div>
+
+In the above output, the names of the projects that an employee was assigned to were successfully retrieved. The `1 row` displayed under the table signified the number of rows that were displayed for this query, meaning that the data related to this query was only available in a single row. Therefore, through the use of the above query, I was able to successfully write a query for retrieving project names assiged to an employee.  
+
+  <div align="center">
+
+### 4.3. Vacation requests for an employee      
+</div>
+
+For this final sub-task, I was required to write the simplest query written so far anywehre in this document, for finding the vacation requests from employee name. Such a data retrieval was made possible by writing the following query:
+```
+SELECT hr.employees.employee_id, hr.employees.first_name, hr.employees.last_name, hr.vacation_requests.request_id, hr.vacation_requests.start_date, hr.vacation_requests.end_date, hr.vacation_requests.status
+FROM hr.vacation_requests
+JOIN hr.employees ON hr.vacation_requests.employee_id = hr.employees.employee_id
+WHERE hr.employees.first_name = `'<first name>'` AND hr.employees.last_name = `'last name'`;
+```
+
+I wrote the above query with a possible use case of finding the vacation requests made by an employee. An example of running the above query for an employee with the first name of `Yash` and last name of `Anand`, would give the following output:
+
+**Output:**     
+  <div align="center">
+
+![image](https://i.imgur.com/wTPKk8B.png)
+</div>
+
+The `1 row` mentioned under the displayed table of the output is used to suggest the number of rows in which data is related to an employee's vacation_request is placed in. In the written query, the `WHERE` SQL Keyword helps search for data belonging to specific columns and therefore, allowed me to search for the vacation_requests of a specific employee. 
+_____________________________
+
+  <div align="center">
+
+## Conclusion
+</div>
+
+After the completion of these 4 tasks, which greatly depended on building relationships between tables, I was able to learn and understand the concept of primary keys, foreign keys, constraints, joins and alters. Through this document, I was also able to demonstrate and perform the assigned tasks, which helped me gain a lot of practical understanding of PostgreSQL and SQL.
 
 --------
